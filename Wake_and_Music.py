@@ -1,8 +1,10 @@
 import subprocess
 import time
+import urllib.request
+import webbrowser
+import keyboard
 import sys
 import wakeonlan
-import keyboard
 import Sniff_IP
 
 
@@ -26,6 +28,12 @@ class Wake():
             wakeonlan.send_magic_packet(self.MAC_addres, ip_address=self.IP_addres)
         else:
             sys.exit(4)
+
+
+
+    def music(self):
+
+        webbrowser.open(self.url)
 
 
 
