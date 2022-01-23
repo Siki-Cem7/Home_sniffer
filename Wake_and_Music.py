@@ -1,9 +1,10 @@
 import subprocess
 import time
-import sys
 import wakeonlan
 import keyboard
 import Sniff_IP
+import sys
+import socket
 
 
 
@@ -21,11 +22,27 @@ class Wake():
     def wake_pc(self):
 
         print("Start")
-        self.sniff.sniff()
-        if(self.sniff.home == True):
-            wakeonlan.send_magic_packet(self.MAC_addres, ip_address=self.IP_addres)
-        else:
-            sys.exit(4)
+        #self.sniff.sniff()
+        #if(self.sniff.home == True):
+        #wakeonlan.send_magic_packet(self.MAC_addres, ip_address=self.IP_addres)
+        #else:
+        #    sys.exit(4)
+
+        """
+        mac = sys.argv[2]
+        data = ''.join(['FF' * 6, mac.replace(':', '') * 16])
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        sock.sendto(bytes(data.encode("utf-8")), (sys.argv[1], 9))
+        """
+
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        s.sendto(b'\xff' * 6 + b'\x80\x4a\x14\x5e\xc6\x3c' * 16, ('192.168.1.255', 9))
+
+
+
+        print("Finish")
 
 
 
