@@ -1,7 +1,10 @@
 import subprocess
 import time
-import wakeonlan
+import urllib.request
+import webbrowser
 import keyboard
+import sys
+import wakeonlan
 import Sniff_IP
 import socket
 import sys
@@ -43,9 +46,6 @@ class Wake():
 
 
 
+    def music(self):
 
-
-
-if __name__ == "__main__":
-    wake = Wake()
-    wake.wake_pc()
+        webbrowser.open(self.url)
